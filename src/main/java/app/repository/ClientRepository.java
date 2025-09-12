@@ -78,5 +78,4 @@ public class ClientRepository {
         clients.removeIf(x -> x.getId() == id);
         mapper.writeValue(database, clients);
     }
-
 }
