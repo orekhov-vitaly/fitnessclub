@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Training {
     private int id;
     private String title;
+    private double price;
     private int durationInDays;
     private boolean active;
 
@@ -13,6 +14,12 @@ public class Training {
 
     public Training(String title, int durationInDays) {
         this.title = title;
+        this.durationInDays = durationInDays;
+    }
+
+    public Training(String title, double price, int durationInDays) {
+        this.title = title;
+        this.price = price;
         this.durationInDays = durationInDays;
     }
 
@@ -44,6 +51,14 @@ public class Training {
         this.title = title;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public int getDurationInDays() {
         return durationInDays;
     }
@@ -64,12 +79,12 @@ public class Training {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Training training = (Training) o;
-        return id == training.id && durationInDays == training.durationInDays && active == training.active && Objects.equals(title, training.title);
+        return id == training.id && Double.compare(price, training.price) == 0 && durationInDays == training.durationInDays && active == training.active && Objects.equals(title, training.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, durationInDays, active);
+        return Objects.hash(id, title, price, durationInDays, active);
     }
 
     @Override
@@ -77,6 +92,7 @@ public class Training {
         return "Training{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
+                ", price=" + price +
                 ", durationInDays=" + durationInDays +
                 ", active=" + active +
                 '}';

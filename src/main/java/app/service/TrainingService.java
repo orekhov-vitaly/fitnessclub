@@ -16,7 +16,7 @@ public class TrainingService {
         repository = new TrainingRepository();
     }
 
-    public Training save(Training training) throws TrainingSaveException {
+    public Training save(Training training) throws TrainingSaveException, IOException {
         if (training == null) {
             throw new TrainingSaveException("Тренировка не может быть null");
         }
@@ -24,6 +24,10 @@ public class TrainingService {
         String title = training.getTitle();
         if (title == null || title.trim().isEmpty()) {
             throw new TrainingSaveException("Название тренировки не может быть пустым");
+        }
+
+        if (training.getPrice() <= 0) {
+            throw new TrainingSaveException("Цена тренировки должна быть положительной");
         }
 
         if (training.getDurationInDays() <= 0) {
@@ -53,11 +57,15 @@ public class TrainingService {
 
     public void update(Training training) throws TrainingUpdateException, IOException {
         if (training == null) {
-            throw new TrainingUpdateException("Продукт не может быть null");
+            throw new TrainingUpdateException("Тренировка не может быть null");
         }
 
         if (training.getPrice() <= 0) {
-            throw new TrainingUpdateException("Цена продукта должна быть положительной");
+            throw new TrainingUpdateException("Цена тренировки должна быть положительной");
+        }
+
+        if (training.getDurationInDays() <= 0) {
+            throw new TrainingUpdateException("Продолжительность тренировки должна быть положительной");
         }
 
         training.setActive(true);
@@ -94,7 +102,7 @@ public class TrainingService {
         }
     }
 
-    public int getActiveTrainingCount() throws IOException {
+    public int getActiveTrainingsCount() throws IOException {
         return getAllActiveTrainings().size();
     }
 
@@ -105,13 +113,28 @@ public class TrainingService {
                 .sum();
     }
 
-    public double getActiveProductsAveragePrice() throws IOException {
-        int productCount = getActiveProductsCount();
+    public double getActiveTrainingsAveragePrice() throws IOException {
+        int trainingCount = getActiveTrainingsCount();
 
-        if (productCount == 0) {
+        if (trainingCount == 0) {
             return 0.0;
         }
 
-        return getActiveProductsTotalCost() / productCount;
+        return getActiveTrainingsTotalCost() / trainingCount;
+    }
+
+    public double getActiveTrainingsAverageDuration() throws IOException {
+        int trainingCount = getActiveTrainingsCount();
+
+        if (trainingCount == 0) {
+            return 0.0;
+        }
+
+        double trainingTotalDuration = getAllActiveTrainings()
+                .stream()
+                .mapToDouble(Training::getDurationInDays)
+                .sum();
+
+        return trainingTotalDuration / trainingCount;
     }
 }
