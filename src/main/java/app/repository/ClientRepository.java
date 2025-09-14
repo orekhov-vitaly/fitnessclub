@@ -31,12 +31,12 @@ public class ClientRepository {
         }
     }
 
-    public Client save(Client customer) throws IOException {
-        customer.setId(++maxId);
-        List<Client> customers = findAll();
-        customers.add(customer);
-        mapper.writeValue(database, customers);
-        return customer;
+    public Client save(Client client) throws IOException {
+        client.setId(++maxId);
+        List<Client> clients = findAll();
+        clients.add(client);
+        mapper.writeValue(database, clients);
+        return client;
     }
 
     public List<Client> findAll() throws IOException {

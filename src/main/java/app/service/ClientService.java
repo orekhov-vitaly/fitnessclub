@@ -7,7 +7,6 @@ import app.exceptions.ClientSaveException;
 import app.exceptions.ClientUpdateException;
 import app.exceptions.TrainingNotFoundException;
 import app.repository.ClientRepository;
-import app.repository.TrainingRepository;
 
 import java.io.IOException;
 import java.util.List;
