@@ -28,9 +28,10 @@ public class Training {
         this.durationInDays = durationInDays;
     }
 
-    public Training(int id, String title, int durationInDays, boolean active) {
+    public Training(int id, String title, double price, int durationInDays, boolean active) {
         this.id = id;
         this.title = title;
+        this.price = price;
         this.durationInDays = durationInDays;
         this.active = active;
     }
