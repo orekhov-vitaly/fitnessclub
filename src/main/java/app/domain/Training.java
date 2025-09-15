@@ -9,6 +9,18 @@ public class Training {
     private int durationInDays;
     private boolean active;
 
+    private final static String COLOR_BLACK = "\u001B[0m";
+
+    public static final String COLOR_RESET = "\u001B[0m";
+    public static final String COLOR_RED = "\u001B[31m";
+    public static final String COLOR_GREEN = "\u001B[32m";
+    public static final String COLOR_YELLOW = "\u001B[33m";
+    public static final String COLOR_BLUE = "\u001B[34m";
+    public static final String COLOR_PURPLE = "\u001B[35m";
+    public static final String COLOR_CYAN = "\u001B[36m";
+
+    public static final String COLOR_WHITE = "\u001B[37m";
+
     public Training() {
     }
 
@@ -97,12 +109,6 @@ public class Training {
 
     @Override
     public String toString() {
-        return "Training{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", price=" + price +
-                ", durationInDays=" + durationInDays +
-                ", active=" + active +
-                '}';
+        return String.format(COLOR_BLUE + "Тренировки: id - %d, название - %s, цена - %.2f, длительность в днях - %d, активна - %b" + COLOR_RESET, id, title, price, durationInDays, active);
     }
 }

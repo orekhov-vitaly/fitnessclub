@@ -10,6 +10,18 @@ public class Client {
     private boolean active;
     private List<Training> trainings = new ArrayList<>();
 
+    private final static String COLOR_BLACK = "\u001B[0m";
+
+    public static final String COLOR_RESET = "\u001B[0m";
+    public static final String COLOR_RED = "\u001B[31m";
+    public static final String COLOR_GREEN = "\u001B[32m";
+    public static final String COLOR_YELLOW = "\u001B[33m";
+    public static final String COLOR_BLUE = "\u001B[34m";
+    public static final String COLOR_PURPLE = "\u001B[35m";
+    public static final String COLOR_CYAN = "\u001B[36m";
+
+    public static final String COLOR_WHITE = "\u001B[37m";
+
     public Client() {
     }
 
@@ -68,6 +80,6 @@ public class Client {
 
     @Override
     public String toString() {
-        return String.format("Клиент: id - %d, имя - %s, активен - %b, список тренировок - %s", id, name, active, trainings);
+        return String.format(COLOR_BLUE + "Клиент: id - %d, имя - %s, активен - %b, список тренировок - %s" + COLOR_RESET, id, name, active, trainings);
     }
 }

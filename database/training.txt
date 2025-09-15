@@ -1,0 +1,13 @@
+[ {
+  "id" : 1,
+  "title" : "Workout",
+  "price" : 120.0,
+  "durationInDays" : 15,
+  "active" : true
+}, {
+  "id" : 2,
+  "title" : "Йога",
+  "price" : 100.0,
+  "durationInDays" : 10,
+  "active" : true
+} ]

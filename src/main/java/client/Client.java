@@ -56,11 +56,11 @@ public class Client {
         }
     }
 
-    private static void clientOperations() {
+    private static void trainingOperations() {
         while (true) {
             try {
                 System.out.println("Выберите желаемую операцию с тренировками:");
-                System.out.println("1 - сохранить тренировку");
+                System.out.println("1 - создать новую тренировку");
                 System.out.println("2 - получить все тренировки");
                 System.out.println("3 - получить тренировку по идентификатору");
                 System.out.println("4 - изменить тренировку");
@@ -81,7 +81,7 @@ public class Client {
                         System.out.println("Введите цену тренировки:");
                         double price = Double.parseDouble(scanner.nextLine());
                         System.out.println("Введите длительность тренировки:");
-                        double duration = Double.parseDouble(scanner.nextLine());
+                        int duration = Integer.parseInt(scanner.nextLine());
                         System.out.println(trainingController.save(title, price, duration));
                         break;
                     case "2":
@@ -95,9 +95,13 @@ public class Client {
                     case "4":
                         System.out.println("Введите идентификатор тренировки:");
                         id = Integer.parseInt(scanner.nextLine());
+                        System.out.println("Введите новое название тренировки:");
+                        title = scanner.nextLine();
                         System.out.println("Введите новую цену тренировки:");
                         price = Double.parseDouble(scanner.nextLine());
-                        trainingController.update(id, price);
+                        System.out.println("Введите новую длительность тренировки:");
+                        duration = Integer.parseInt(scanner.nextLine());
+                        trainingController.update(id, title, price, duration);
                         System.out.println(trainingController.getActiveTrainingById(id));
                         break;
                     case "5":
@@ -122,12 +126,12 @@ public class Client {
                         System.out.println("Суммарная стоимость всех тренировок: " + trainingController.getActiveTrainingsTotalCost());
                         break;
                     case "10":
-                        System.out.println("Средняя стоимость тренировки: " + trainingController.getActiveTrainingsAveragePrice());
+                        System.out.println("Средняя стоимость тренировок: " + trainingController.getActiveTrainingsAveragePrice());
                         break;
                     case "0":
                         return;
                     default:
-                        System.out.println("Некорректный ввод!");
+                        System.out.println(COLOR_YELLOW + "Некорректный ввод!" + COLOR_RESET);
                 }
             } catch (Exception e) {
                 System.err.println(e.getMessage());
@@ -135,30 +139,30 @@ public class Client {
         }
     }
 
-    private static void trainingOperations() {
+    private static void clientOperations() {
         while (true) {
             try {
-                System.out.println("Выберите желаемую операцию с покупателями:");
-                System.out.println("1 - сохранить покупателя");
-                System.out.println("2 - получить всех покупателей");
-                System.out.println("3 - получить покупателя по идентификатору");
-                System.out.println("4 - изменить покупателя");
-                System.out.println("5 - удалить покупателя по идентификатору");
-                System.out.println("6 - удалить покупателя по имени");
-                System.out.println("7 - восстановить покупателя по идентификатору");
-                System.out.println("8 - получить количество покупателей");
-                System.out.println("9 - получить стоимость корзины покупателя");
-                System.out.println("10 - получить среднюю стоимость продукта в корзине покупателя");
-                System.out.println("11 - добавить товар в корзину покупателя");
-                System.out.println("12 - удалить товар из корзины покупателя");
-                System.out.println("13 - очистить корзину покупателя");
+                System.out.println("Выберите желаемую операцию с клиентами:");
+                System.out.println("1 - создать нового клиента");
+                System.out.println("2 - получить всех клиентов");
+                System.out.println("3 - получить клиента по идентификатору");
+                System.out.println("4 - изменить клиента");
+                System.out.println("5 - удалить клиента по идентификатору");
+                System.out.println("6 - удалить клиента по имени");
+                System.out.println("7 - восстановить клиента по идентификатору");
+                System.out.println("8 - получить количество клиентов");
+                System.out.println("9 - получить стоимость тренировок клиента");
+                System.out.println("10 - получить среднюю стоимость тренировок клиента");
+                System.out.println("11 - добавить тренировку клиенту");
+                System.out.println("12 - удалить тренировку у клиента");
+                System.out.println("13 - очистить тренировки у клиента");
                 System.out.println("0 - выход");
 
                 String input = scanner.nextLine();
 
                 switch (input) {
                     case "1":
-                        System.out.println("Введите имя нового покупателя:");
+                        System.out.println("Введите имя нового клиента:");
                         String name = scanner.nextLine();
                         clientController.save(name);
                         break;
@@ -166,68 +170,68 @@ public class Client {
                         clientController.getAllActiveClients().forEach(System.out::println);
                         break;
                     case "3":
-                        System.out.println("Введите идентификатор покупателя:");
+                        System.out.println("Введите идентификатор клиента:");
                         int id = Integer.parseInt(scanner.nextLine());
                         System.out.println(clientController.getActiveClientById(id));
                         break;
                     case "4":
-                        System.out.println("Введите идентификатор покупателя:");
+                        System.out.println("Введите идентификатор клиента:");
                         id = Integer.parseInt(scanner.nextLine());
-                        System.out.println("Введите имя покупателя:");
+                        System.out.println("Введите имя клиента:");
                         name = scanner.nextLine();
                         clientController.update(id, name);
                         break;
                     case "5":
-                        System.out.println("Введите идентификатор покупателя:");
+                        System.out.println("Введите идентификатор клиента:");
                         id = Integer.parseInt(scanner.nextLine());
                         clientController.deleteById(id);
                         break;
                     case "6":
-                        System.out.println("Введите имя покупателя:");
+                        System.out.println("Введите имя клиента:");
                         name = scanner.nextLine();
                         clientController.deleteByName(name);
                         break;
                     case "7":
-                        System.out.println("Введите идентификатор покупателя:");
+                        System.out.println("Введите идентификатор клиента:");
                         id = Integer.parseInt(scanner.nextLine());
                         clientController.restoreById(id);
                         break;
                     case "8":
-                        System.out.println("Количество покупателей: " + clientController.getActiveClientsCount());
+                        System.out.println("Количество клиентов: " + clientController.getActiveClientsCount());
                         break;
                     case "9":
-                        System.out.println("Введите идентификатор покупателя:");
+                        System.out.println("Введите идентификатор клиента:");
                         id = Integer.parseInt(scanner.nextLine());
-                        System.out.println("Стоимость корзины покупателя: " + clientController.getClientCaretTotalPrice(id));
+                        System.out.println("Стоимость тренировок клиента: " + clientController.getClientTrainingsTotalPrice(id));
                         break;
                     case "10":
-                        System.out.println("Введите идентификатор покупателя:");
+                        System.out.println("Введите идентификатор клиента:");
                         id = Integer.parseInt(scanner.nextLine());
-                        System.out.println("Средняя стоимость продукта в корзине покупателя: " + clientController.getClientCartAveragePrice(id));
+                        System.out.println("Средняя стоимость тренировок клиента: " + clientController.getClientTrainingsAveragePrice(id));
                         break;
                     case "11":
-                        System.out.println("Введите идентификатор покупателя:");
+                        System.out.println("Введите идентификатор клиента:");
                         int clientId = Integer.parseInt(scanner.nextLine());
-                        System.out.println("Введите идентификатор продукта:");
+                        System.out.println("Введите идентификатор тренировки:");
                         int trainingId = Integer.parseInt(scanner.nextLine());
-                        clientController.addTrainingToClientCart(clientId, trainingId);
+                        clientController.addTrainingToClient(clientId, trainingId);
                         break;
                     case "12":
-                        System.out.println("Введите идентификатор покупателя:");
+                        System.out.println("Введите идентификатор клиента:");
                         clientId = Integer.parseInt(scanner.nextLine());
-                        System.out.println("Введите идентификатор продукта:");
+                        System.out.println("Введите идентификатор тренировки:");
                         trainingId = Integer.parseInt(scanner.nextLine());
-                        clientController.removeTrainingFromClientCart(clientId,trainingId);
+                        clientController.removeTrainingFromClient(clientId,trainingId);
                         break;
                     case "13":
-                        System.out.println("Введите идентификатор покупателя:");
+                        System.out.println("Введите идентификатор клиента:");
                         id = Integer.parseInt(scanner.nextLine());
-                        clientController.clearClientCart(id);
+                        clientController.clearClientTrainings(id);
                         break;
                     case "0":
                         return;
                     default:
-                        System.out.println("Некорректный ввод!");
+                        System.out.println(COLOR_YELLOW + "Некорректный ввод!" + COLOR_RESET);
                 }
             } catch (Exception e) {
                 System.err.println(e.getMessage());

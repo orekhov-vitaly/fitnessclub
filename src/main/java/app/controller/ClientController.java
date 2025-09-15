@@ -64,8 +64,8 @@ public class ClientController {
         service.addTrainingToClient(clientId, trainingId);
     }
 
-    public void removeTrainingFromClient(int clientId, int traningId) throws IOException, ClientNotFoundException, TrainingNotFoundException {
-        service.removeTrainingFromClient(clientId, traningId);
+    public void removeTrainingFromClient(int clientId, int trainingId) throws IOException, ClientNotFoundException, TrainingNotFoundException {
+        service.removeTrainingFromClient(clientId, trainingId);
     }
 
     public void clearClientTrainings(int id) throws IOException, ClientNotFoundException {
