@@ -36,6 +36,13 @@ public class Training {
         this.active = active;
     }
 
+    public Training(int id, String title, double price, int durationInDays) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+        this.durationInDays = durationInDays;
+    }
+
     public int getId() {
         return id;
     }
