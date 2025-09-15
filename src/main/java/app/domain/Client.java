@@ -68,11 +68,6 @@ public class Client {
 
     @Override
     public String toString() {
-        return "Client{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", active=" + active +
-                ", trainings=" + trainings +
-                '}';
+        return String.format("Клиент: id - %d, имя - %s, активен - %b, список тренировок - %s", id, name, active, trainings);
     }
 }

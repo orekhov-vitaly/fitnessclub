@@ -59,6 +59,7 @@ public class TrainingRepository {
     public void update(Training training) throws IOException {
         int id = training.getId();
         String newTitle = training.getTitle();
+        double newPrice = training.getPrice();
         int newDuration = training.getDurationInDays();
         boolean newActive = training.isActive();
 
@@ -67,6 +68,7 @@ public class TrainingRepository {
                 .filter(x -> x.getId() == id)
                 .forEach(x -> {
                     x.setTitle(newTitle);
+                    x.setPrice(newPrice);
                     x.setDurationInDays(newDuration);
                     x.setActive(newActive);
                 });

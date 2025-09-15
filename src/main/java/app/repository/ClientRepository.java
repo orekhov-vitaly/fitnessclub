@@ -18,7 +18,7 @@ public class ClientRepository {
     private final ObjectMapper mapper;
     private int maxId;
 
-    public ClientRepository () throws IOException {
+    public ClientRepository() throws IOException {
         database = new File("database/client.txt");
         mapper = new ObjectMapper();
 
@@ -30,13 +30,15 @@ public class ClientRepository {
             maxId = lastClient.getId();
         }
     }
-    public Client save(Client customer) throws IOException {
-        customer.setId(++maxId);
-        List<Client> customers = findAll();
-        customers.add(customer);
-        mapper.writeValue(database, customers);
-        return customer;
+
+    public Client save(Client client) throws IOException {
+        client.setId(++maxId);
+        List<Client> clients = findAll();
+        clients.add(client);
+        mapper.writeValue(database, clients);
+        return client;
     }
+
     public List<Client> findAll() throws IOException {
         try {
             Client[] clients = mapper.readValue(database, Client[].class);
@@ -45,6 +47,7 @@ public class ClientRepository {
             return new ArrayList<>();
         }
     }
+
     public Client findById(int id) throws IOException {
         return findAll()
                 .stream()
@@ -52,7 +55,8 @@ public class ClientRepository {
                 .findFirst()
                 .orElse(null);
     }
-    public void  update(Client client) throws IOException {
+
+    public void update(Client client) throws IOException {
         int id = client.getId();
         String newName = client.getName();
         boolean active = client.isActive();
@@ -65,12 +69,9 @@ public class ClientRepository {
                 .forEach(x -> {
                     x.setName(newName);
                     x.setActive(active);
-
                     x.setTrainings(trainings);
                 });
         mapper.writeValue(database, clients);
-
-
     }
 
     public void deleteById(int id) throws IOException {
